@@ -1,4 +1,5 @@
-Exercise 1:
+1. Exercise 1:
+
 In exercise 1, monthly base salary of the employees is calculated and displayed according to the number of hours and hourly salary.
 
 `Employee(String name,int hours, double salPerHour)` : Takes name ,hourly salary, number of hours of work per day of employee. 
@@ -18,7 +19,8 @@ In exercise 1, monthly base salary of the employees is calculated and displayed 
 
 
 
-2.Exercise 2:
+2. Exercise 2:
+
 In exercise 2, area and perimeter of circle, square and rectangle is calculated according to the given radius,lengths and breadth.
 
 In this exercise, we have Class Shape with variables area and perimeter
@@ -32,7 +34,8 @@ In this exercise, we have Class Shape with variables area and perimeter
 
 
 
-2.Exercise 3:
+3. Exercise 3:
+
 In this exercise, data of football and basketball teams and the results of currents matches of each team is stored in csv fileand  is handled using BufferedReader class.
 There are three classes Football, Basketball and Main class and one interface Team.
 Read data from csv file is stored in collections of type Team `ft_obj and bb_obj` according to the sports.
