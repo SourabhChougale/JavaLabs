@@ -3,10 +3,15 @@ In exercise 1, monthly base salary of the employees is calculated and displayed 
 
 `Employee(String name,int hours, double salPerHour)` : Takes name ,hourly salary, number of hours of work per day of employee. 
 `calSalPerDay()` : Calculates salary per day.
+
 `addWork()` : Adds $5 daily to salary of employee if the number of hours of work per day is more than 6 hours.
+
 `computeBaseSalary()` : Computes the base salary for 20 days of work.
+
 `addSal()` : Adds $10 to the base salary of the employee if it is less than $500.
+
 `getFinalSalary()`: returns final salary of employee
+
 `result()`: Prints Salary of Employee
 
 
