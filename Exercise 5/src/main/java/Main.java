@@ -33,7 +33,7 @@ public class Main {
         //Iterating through List data and creating Customer object to store in Customer Object array
         for (String l : data) {
             String[] l1 = l.split(",");
-            Customer c = new Customer(l1[0], l1[1], Integer.parseInt(l1[2]), l1[4], (l1[4]));
+            Customer c = new Customer(l1[0], l1[1], Integer.parseInt(l1[2]), l1[3], (l1[4]));
             c_obj.add(c);
         }
         return c_obj; //returning object array
@@ -121,6 +121,10 @@ public class Main {
             String model;
             int seats;
             String license_plate;
+            String name;
+            String id_num;
+            String startDate ;
+            String endDate;
 
 
             Scanner sc = new Scanner(System.in);
@@ -128,7 +132,7 @@ public class Main {
                     "Enter your choice:\n" +
                     "1.Add new vehicle to car fleet\n" +
                     "2.Remove a vehicle from car fleet\n" +
-                    "3.Display available vehicles\n" +
+                    "3.Display available vehicles in specific period\n" +
                     "4.Add new rental\n" +
                     "5.Return the rented vehicle\n" +
                     "6.Display overall rental fleet\n" +
@@ -198,11 +202,42 @@ public class Main {
                 }
                 case 3: {
                     ArrayList<Vehicle> v_obj = m.readVehicleData();
+                    ArrayList<Customer> c_obj=m.readCustomerData();
+                    System.out.println("Enter Start Date (dd/mm/yyyy)");
+                    startDate=sc.nextLine();
+                    System.out.println("Enter End Date (dd/mm/yyyy)");
+                    endDate=sc.nextLine();
+                    try {
+                        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(startDate); //converting string to date type
+                        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
 
-                    for (Vehicle v : v_obj) {
-                        if (v.isAvailability()) {
-                            System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() + " " + v.isAvailability());
+
+                        if (date2.compareTo(date1) < 0 || date1.compareTo(new Date())<0) { //check if end date is less than start date and start date is greater than today's date
+                            System.out.println("Enter proper dates");
+                        } else {
+
+                                for(Vehicle v:v_obj){
+                                    if(v.isAvailability()){
+                                        System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() );
+                                         }
+                                    else{
+                                        for(Customer c:c_obj){
+                                            Date end_date = new SimpleDateFormat("dd/MM/yyyy").parse(c.getEndDate());
+                                            Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse(c.getStartDate());
+
+                                        if(v.getId_code()==c.getId_code()){
+                                            if (date1.compareTo(end_date)>0 || date2.compareTo(start_date)<0){
+                                            System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() );
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
                         }
+                    } catch (ParseException p) {
+                        p.printStackTrace();
                     }
                     break;
                 }
@@ -210,8 +245,7 @@ public class Main {
 
                     //Getting customer data from csv file and storing in object array
                     ArrayList<Customer> c_obj = m.readCustomerData();
-                    String name;
-                    String id_num;
+                    ArrayList<Vehicle> v_obj = m.readVehicleData();
                     System.out.println("Enter name of customer:");
                     name = sc.nextLine();
                     System.out.println("Enter identification number:");
@@ -220,18 +254,18 @@ public class Main {
                     id_code = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Enter Start Date (dd/mm/yyyy)");
-                    String startDate = sc.nextLine();
+                     startDate = sc.nextLine();
                     System.out.println("Enter End Date (dd/mm/yyyy)");
-                    String endDate = sc.nextLine();
+                     endDate = sc.nextLine();
                     try {
                         Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(startDate); //converting string to date type
                         Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-                        if (date2.compareTo(date1) < 0) { //check if end date is less than start date
+
+                        if (date2.compareTo(date1) < 0 || date1.compareTo(new Date())<0) { //check if end date is less than start date
                             System.out.println("Enter proper dates");
                         } else {
-                            ArrayList<Vehicle> v_obj = m.readVehicleData();
-                            Customer c = new Customer(name, id_num, id_code, startDate, endDate);
 
+                            Customer c = new Customer(name, id_num, id_code, startDate, endDate);
                             //check if vehicle with entered id is present in car fleet
                             boolean flag = false;
                             for (Vehicle v : v_obj) {
@@ -288,7 +322,7 @@ public class Main {
                     ArrayList<Vehicle> v_obj = m.readVehicleData();
 
                     for (Vehicle v : v_obj) {
-                        System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() + " " + v.isAvailability());
+                        System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() );
 
                     }
                     break;
