@@ -173,6 +173,7 @@ public class Main {
                         Vehicle v = new Vehicle(id_code, brand, model, seats, license_plate, true);
                         v_obj.add(v);
                         m.writeVehicleData(v_obj);
+                        System.out.println("Vehicle added successfully!");
                     } else System.out.println("This identification number already exits");
                     break;
                 }
@@ -196,7 +197,10 @@ public class Main {
                     }
                     if (!flag2)
                         System.out.println("Cannot remove this vehicle");
-                    else v_obj.remove(i);
+                    else {
+                        v_obj.remove(i);
+                        System.out.println("Vehicle removed successfully!");
+                    }
                     m.writeVehicleData(v_obj);
                     break;
                 }
@@ -215,7 +219,7 @@ public class Main {
                         if (date2.compareTo(date1) < 0 || date1.compareTo(new Date())<0) { //check if end date is less than start date and start date is greater than today's date
                             System.out.println("Enter proper dates");
                         } else {
-
+                            System.out.println("VehicleIdCode Brand Model Seats LicensePlate ");
                                 for(Vehicle v:v_obj){
                                     if(v.isAvailability()){
                                         System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() );
@@ -282,6 +286,7 @@ public class Main {
                                             m.writeCustomerData(c_obj);  //writing the data to customer csv file
                                             v.setAvailability(false); //changing availability of vehicle to false
                                             m.writeVehicleData(v_obj); //writing data to vehicle csv file
+                                            System.out.println("Rental added successfully!");
                                             break;
                                         } else System.out.println("Sorry, this vehicle is already rented");
                                     }
@@ -309,6 +314,7 @@ public class Main {
                             if(!v.isAvailability()) {  //checking if its already returned
                                 v.setAvailability(true); //if not changing availability to true
                                 m.writeVehicleData(v_obj); //writing update in csv file
+                                System.out.println("Vehicle returned successfully!");
 
                                 break;
                             }else System.out.println("Already returned");
@@ -320,7 +326,7 @@ public class Main {
                 }
                 case 6: {
                     ArrayList<Vehicle> v_obj = m.readVehicleData();
-
+                    System.out.println("VehicleIdCode Brand Model Seats LicensePlate ");
                     for (Vehicle v : v_obj) {
                         System.out.println(v.getId_code() + " " + v.getBrand() + " " + v.getModel() + " " + v.getSeats() + " " + v.getLicense_plate() );
 
@@ -350,6 +356,7 @@ public class Main {
                             }
                         }
                         m.writeVehicleData(v_obj);
+                        System.out.println("File imported successfully!");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
