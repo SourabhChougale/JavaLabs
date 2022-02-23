@@ -36,7 +36,7 @@ In this exercise, we have Class Shape with variables area and perimeter
 
 3. Exercise 3:
 
-In this exercise, data of football and basketball teams and the results of currents matches of each team is stored in csv fileand  is handled using BufferedReader class.
+In this exercise, data of football and basketball teams and the results of recent matches of each team is stored in csv fileand  is handled using BufferedReader class.
 There are three classes Football, Basketball and Main class and one interface Team.
 Read data from csv file is stored in collections of type Team `ft_obj and bb_obj` according to the sports.
 
